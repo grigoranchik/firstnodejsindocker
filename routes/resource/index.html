@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<script>
+    window.onload = function () {
+        var counter = 0;
+        var btn = document.getElementById('idGetRequest');
+        btn.addEventListener('click', function () {
+            var xhr = new XMLHttpRequest();
+
+            xhr.open('post', '/getInfo');
+
+            var data = {
+                val: counter
+            };
+            xhr.setRequestHeader('Content-Type', 'application/json');
+            //debugger;
+            xhr.send(JSON.stringify(data));
+
+            xhr.onload = function () {
+                //debugger;
+                console.log('ответ на ' + this.responseText + ' запрос');
+            };
+            xhr.onerror = function () {
+                alert('server error!');
+            };
+            counter++;
+        });
+    }
+</script>
+<body>
+<h1>Start page</h1>
+<button id = "idGetRequest">getRequest</button>
+</body>
+</html>
